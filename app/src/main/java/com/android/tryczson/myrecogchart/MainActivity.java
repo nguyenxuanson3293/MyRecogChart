@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.android.tryczson.barchartstatusreport.BarChartStatusReport;
 import com.android.tryczson.barchartstatusreport.Object.BarChartStatusData;
+import com.android.tryczson.barchartstatusreport.PieChart;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private BarChartStatusReport mBarChart;
+    private PieChart mPieChart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +28,11 @@ public class MainActivity extends AppCompatActivity {
         listStatus.add(new BarChartStatusData("ルドレスが不", 55, "#5fbb33"));
         listStatus.add(new BarChartStatusData("ルアレ不", 30, "#f1b327"));
         mBarChart.setListStatus(listStatus);
+
+        mPieChart = (PieChart) findViewById(R.id.pieChart);
+
+        mPieChart.setPercentage(70);
+        mPieChart.setTextPieChart("レスが不");
+        mPieChart.setColorPieChart("#6e61c2");
     }
 }

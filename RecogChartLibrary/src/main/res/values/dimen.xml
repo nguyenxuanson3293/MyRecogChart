@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="report_size_text_piechart">15dp</dimen>
+</resources>
