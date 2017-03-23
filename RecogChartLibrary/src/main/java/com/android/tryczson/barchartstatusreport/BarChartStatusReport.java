@@ -109,10 +109,9 @@ public class BarChartStatusReport extends View {
 
             //draw point bar chart
             for (int i = 0; i < mData.size(); i++) {
-                if (mData.get(i).getPoint() == mMax2) {
-                    mPaint.setTextSize(mWidth / 20f);
-                    mPaint.setColor(Color.parseColor("#000000"));
-                } else {
+                mPaint.setTextSize(mWidth / 20f);
+                mPaint.setColor(Color.parseColor("#000000"));
+                if (mData.get(i).getPoint() != mMax2) {
                     mPaint.setTextSize(mWidth / 25f);
                     mPaint.setColor(Color.parseColor("#a0a0a0"));
                 }
