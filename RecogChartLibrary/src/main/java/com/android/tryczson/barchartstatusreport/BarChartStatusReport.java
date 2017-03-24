@@ -9,7 +9,6 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import com.android.tryczson.barchartstatusreport.Object.BarChartStatusData;
@@ -101,10 +100,11 @@ public class BarChartStatusReport extends View {
 
             // draw point collum
             mPaint.setColor(Color.parseColor("#a0a0a0"));
+            mPaint.setStrokeWidth(1);
             mPaint.setTextSize(mWidth / 25f);
             for (int i = 0; i < 4; i++) {
                 mPaint.getTextBounds(String.valueOf((int) (mPointPerCol * i)), 0, String.valueOf((int) (mPointPerCol * i)).length(), bounds);
-                tempCanvas.drawText(String.valueOf((int) (mPointPerCol * i)), mWidthCol * (i + 2) - bounds.width() / 2, mHeightCol * mData.size() + 40, mPaint);
+                tempCanvas.drawText(String.valueOf((int) (mPointPerCol * i)), mWidthCol * (i + 2) - bounds.width() / 2, mHeightCol * mData.size() + 50, mPaint);
             }
 
             // draw name status
@@ -127,22 +127,13 @@ public class BarChartStatusReport extends View {
                 tempCanvas.drawText(String.valueOf(mData.get(i).getPoint() + "pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 15, mPaint);
             }
 
-            Log.d("00000", "" + mMax2);
-
             // draw bar chart
             for (int i = 0; i < mData.size(); i++) {
-                if (mData.get(i).getPoint() == mMax2) {
-                    Log.d("11111", "" + mMax2);
+                mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
+                if (mData.get(i).getPoint() == mMax2)
                     mPaint.setStrokeWidth(48);
-                    mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
-                    tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
-                }
-                else {
-                    mPaint.setStrokeWidth(35);
-                    mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
-                    tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
-                }
-
+                else mPaint.setStrokeWidth(35);
+                tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
             }
 
             canvas.save();

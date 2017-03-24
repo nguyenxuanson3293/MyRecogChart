@@ -105,15 +105,15 @@ public class BarChartStatusProfile extends View {
 
             // draw point collum
             mPaint.setColor(Color.parseColor("#A4A4A4"));
+            mPaint.setStrokeWidth(1);
             mPaint.setTextSize(mWidth / 26f);
             for (int i = 0; i < 5; i++) {
                 mPaint.getTextBounds(String.valueOf((int) (mPointPerCol * i)), 0, String.valueOf((int) (mPointPerCol * i)).length(), bounds);
-                tempCanvas.drawText(String.valueOf((int) (mPointPerCol * i)), mWidthCol * (i + 1) - bounds.width() / 2, mHeightCol * mData.size() + 40, mPaint);
+                tempCanvas.drawText(String.valueOf((int) (mPointPerCol * i)), mWidthCol * (i + 1) - bounds.width() / 2, mHeightCol * mData.size() + 50, mPaint);
             }
 
             // draw name status
             mPaint.setTextSize(mWidth / 24f);
-            mPaint.setStrokeWidth(1);
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor("#000000"));
                 if (mData.get(i).getPoint() != mMax2) {
@@ -139,11 +139,13 @@ public class BarChartStatusProfile extends View {
             tempCanvas.drawBitmap(bitmap1,(float) (mWidthCol * 1.9) ,(float) (mHeightCol * (mData.size() + 0.5)), null);
 
             mPaint.setTextSize(mWidth / 10f);
+            mPaint.setStrokeWidth(3);
             mPaint.setColor(Color.parseColor("#000000"));
             mPaint.getTextBounds(String.valueOf(sum), 0, String.valueOf(sum).length(), bounds);
             tempCanvas.drawText(String.valueOf(sum),(float) (mWidthCol * 1.9 + bitmap1.getWidth()),(float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10 , mPaint);
             mPaint.setTextSize(mWidth / 26f);
-            tempCanvas.drawText("通", (float) (mWidthCol * 1.9 + bitmap1.getWidth() + bounds.width() + 20), (float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10, mPaint);
+            mPaint.setStrokeWidth(1);
+            tempCanvas.drawText("通", (float) (mWidthCol * 1.9 + bitmap1.getWidth() + bounds.width() + 10), (float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10 - 5, mPaint);
 
             // draw bar chart
             int strokeBar = 55;
