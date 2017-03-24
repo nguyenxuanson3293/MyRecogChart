@@ -6,8 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.android.tryczson.barchartstatusreport.Object.BarChartStatusData;
@@ -25,7 +27,9 @@ public class BarChartStatusReport extends View {
     private Canvas tempCanvas;
     private int mWidth, mHeight, mPadding;
     private float mWidthCol, mHeightCol;
-    private float mMax = 0, mMax2;
+    private float mMax = 0;
+    int mMax2;
+    private int flag = 1;
 
     public BarChartStatusReport(Context context) {
         super(context);
@@ -61,6 +65,7 @@ public class BarChartStatusReport extends View {
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
 
         if (mData.size() > 0) {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
@@ -69,7 +74,10 @@ public class BarChartStatusReport extends View {
 
             for (int i = 0; i < mData.size(); i++)
                 mMax = Math.max(mMax, mData.get(i).getPoint());
-            mMax2 = mMax;
+            if (flag == 1) {
+                mMax2 = (int) mMax;
+                flag = 0;
+            }
             if (mMax <= 30) {
                 while (mMax % 3 != 0) mMax = mMax + 1;
             } else if (mMax > 30 && mMax < 300) {
@@ -119,13 +127,22 @@ public class BarChartStatusReport extends View {
                 tempCanvas.drawText(String.valueOf(mData.get(i).getPoint() + "pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 15, mPaint);
             }
 
+            Log.d("00000", "" + mMax2);
+
             // draw bar chart
             for (int i = 0; i < mData.size(); i++) {
-                if (mData.get(i).getPoint() == mMax2)
+                if (mData.get(i).getPoint() == mMax2) {
+                    Log.d("11111", "" + mMax2);
                     mPaint.setStrokeWidth(48);
-                else mPaint.setStrokeWidth(35);
-                mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
-                tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
+                    mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
+                    tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
+                }
+                else {
+                    mPaint.setStrokeWidth(35);
+                    mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
+                    tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
+                }
+
             }
 
             canvas.save();

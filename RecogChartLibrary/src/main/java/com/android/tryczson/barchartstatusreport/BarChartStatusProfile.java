@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -25,7 +26,9 @@ public class BarChartStatusProfile extends View {
     private Canvas tempCanvas;
     private int mWidth, mHeight, mPadding;
     private float mWidthCol, mHeightCol;
-    private float mMax = 0, mMax2;
+    private float mMax = 0;
+    private int mMax2;
+    private int flag = 1;
 
     public BarChartStatusProfile(Context context) {
         super(context);
@@ -61,6 +64,7 @@ public class BarChartStatusProfile extends View {
         mPaint.setAntiAlias(true);
         mPaint.setDither(true);
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
 
         if (mData.size() > 0) {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
@@ -72,7 +76,10 @@ public class BarChartStatusProfile extends View {
                 mMax = Math.max(mMax, mData.get(i).getPoint());
                 sum = sum + mData.get(i).getPoint();
             }
-            mMax2 = mMax;
+            if (flag == 1) {
+                mMax2 = (int) mMax;
+                flag = 0;
+            }
             if (mMax <= 20) {
                 while (mMax % 4 != 0) mMax = mMax + 1;
             } else if (mMax > 20 && mMax < 200) {
