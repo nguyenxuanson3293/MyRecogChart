@@ -113,6 +113,7 @@ public class BarChartStatusProfile extends View {
 
             // draw name status
             mPaint.setTextSize(mWidth / 24f);
+            mPaint.setStrokeWidth(1);
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor("#000000"));
                 if (mData.get(i).getPoint() != mMax2) {
@@ -149,9 +150,15 @@ public class BarChartStatusProfile extends View {
             mPaint.setStrokeWidth(strokeBar);
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
+                tempCanvas.drawLine(mWidthCol * 1, mHeightCol * i + mPadding, (float) (mWidthCol * 1 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
+            }
+
+            mPaint.setStrokeWidth(strokeBar);
+            for (int i = 0; i < mData.size(); i++) {
+                mPaint.setColor(Color.parseColor("#FFFFFF"));
                 if (mData.get(i).getPoint() == mMax2)
-                    mPaint.setAlpha(200);
-                else mPaint.setAlpha(140);
+                    mPaint.setAlpha(50);
+                else mPaint.setAlpha(120);
                 tempCanvas.drawLine(mWidthCol * 1, mHeightCol * i + mPadding, (float) (mWidthCol * 1 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
             }
 
