@@ -65,6 +65,7 @@ public class BarChartStatusProfile extends View {
         if (mData.size() > 0) {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             tempCanvas = new Canvas(bitmap);
+            tempCanvas.drawColor(Color.WHITE);
 
             int sum = 0;
             for (int i = 0; i < mData.size(); i++) {
@@ -91,13 +92,13 @@ public class BarChartStatusProfile extends View {
             for (int i = 1; i < 6; i++) {
                 mPaint.setStrokeWidth(2);
                 if (i == 1)
-                    mPaint.setStrokeWidth(5);
+                    mPaint.setStrokeWidth(4);
                 tempCanvas.drawLine(mWidthCol * i - 2 , 0, mWidthCol*i - 2, mHeightCol * mData.size(), mPaint);
             }
 
             // draw point collum
             mPaint.setColor(Color.parseColor("#a0a0a0"));
-            mPaint.setTextSize(mWidth / 25f);
+            mPaint.setTextSize(mWidth / 26f);
             for (int i = 0; i < 5; i++) {
                 mPaint.getTextBounds(String.valueOf((int) (mPointPerCol * i)), 0, String.valueOf((int) (mPointPerCol * i)).length(), bounds);
                 tempCanvas.drawText(String.valueOf((int) (mPointPerCol * i)), mWidthCol * (i + 1) - bounds.width() / 2, mHeightCol * mData.size() + 40, mPaint);
@@ -110,11 +111,11 @@ public class BarChartStatusProfile extends View {
                 if (mData.get(i).getPoint() != mMax2) {
                     mPaint.setColor(Color.parseColor("#828282"));
                 }
-                tempCanvas.drawText(mData.get(i).getName(), 20, mHeightCol * i + mPadding + 20, mPaint);
+                tempCanvas.drawText(mData.get(i).getName(), 40, mHeightCol * i + mPadding + 20, mPaint);
             }
 
             //draw point bar chart
-            mPaint.setTextSize(mWidth / 24f);
+            mPaint.setTextSize(mWidth / 26f);
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor("#000000"));
                 if (mData.get(i).getPoint() != mMax2) {
@@ -125,16 +126,16 @@ public class BarChartStatusProfile extends View {
 
             // draw max point
             Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_point_barchart);
-            bitmap1 = Bitmap.createScaledBitmap(bitmap1, (int) (mWidth/7), (int) (mWidth/7) , true);
-            tempCanvas.drawBitmap(bitmap1,(float) (mWidthCol * 1.5) , mHeightCol * 3.5f, null);
+            bitmap1 = Bitmap.createScaledBitmap(bitmap1,  mWidth/8, mWidth/8 , true);
+            tempCanvas.drawBitmap(bitmap1,(float) (mWidthCol * 1.9) ,(float) (mHeightCol * (mData.size() + 0.5)), null);
 
-            mPaint.setTextSize(mWidth / 8f);
+            mPaint.setTextSize(mWidth / 10f);
             mPaint.setColor(Color.parseColor("#000000"));
             mPaint.getTextBounds(String.valueOf(sum), 0, String.valueOf(sum).length(), bounds);
-            tempCanvas.drawText(String.valueOf(sum),(float) (mWidthCol * 1.5 + bitmap1.getWidth()), mHeightCol * 3.5f + mWidth/9 , mPaint);
+            tempCanvas.drawText(String.valueOf(sum),(float) (mWidthCol * 1.9 + bitmap1.getWidth()),(float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10 , mPaint);
             mPaint.setTextSize(mWidth / 26f);
             mPaint.setAlpha(150);
-            tempCanvas.drawText("通", (float) (mWidthCol * 1.5 + bitmap1.getWidth() + bounds.width() + 20), mHeightCol * 3.5f + mWidth/9, mPaint);
+            tempCanvas.drawText("通", (float) (mWidthCol * 1.9 + bitmap1.getWidth() + bounds.width() + 20), (float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10, mPaint);
 
             // draw bar chart
             int strokeBar = 55;

@@ -65,6 +65,7 @@ public class BarChartStatusReport extends View {
         if (mData.size() > 0) {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             tempCanvas = new Canvas(bitmap);
+            tempCanvas.drawColor(Color.WHITE);
 
             for (int i = 0; i < mData.size(); i++)
                 mMax = Math.max(mMax, mData.get(i).getPoint());

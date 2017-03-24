@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
         listStamp.add(new StampData("#6E61C2", 5));
 
         ArrayList<BarChartStatusData> listStatus2 = new ArrayList<>();
+        listStatus2.add(new BarChartStatusData("が不", 40, "#F2354B", listStamp));
         listStatus2.add(new BarChartStatusData("が不", 30, "#F2354B", listStamp));
-        listStatus2.add(new BarChartStatusData("レス", 40, "#F2354B", listStamp));
-        listStatus2.add(new BarChartStatusData("が不", 30, "#F2354B", listStamp));
+        listStatus2.add(new BarChartStatusData("が不", 20, "#F2354B", listStamp));
         mBarChart2.setListStatus(listStatus2);
 
 

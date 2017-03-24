@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/transparent"
     tools:context="com.android.tryczson.myrecogchart.MainActivity">
 
     <ScrollView
@@ -22,7 +23,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_height="300dp" />
+                android:layout_height="280dp" />
 
 
             <com.android.tryczson.barchartstatusreport.BarChartStatusReport
