@@ -7,20 +7,41 @@
     android:orientation="vertical"
     tools:context="com.android.tryczson.myrecogchart.MainActivity">
 
-    <com.android.tryczson.barchartstatusreport.BarChartStatusReport
-        android:id="@+id/barChart"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="250dp" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <com.android.tryczson.barchartstatusreport.PieChart
-        android:id="@+id/pieChart"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center_horizontal"
-        app:colorChart="#5fbb33"
-        app:percentage="70"
-        app:text="QWERTY"/>
+            <com.android.tryczson.barchartstatusreport.BarChartStatusProfile
+                android:id="@+id/barChart2"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="300dp" />
+
+
+            <com.android.tryczson.barchartstatusreport.BarChartStatusReport
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp" />
+
+            <com.android.tryczson.barchartstatusreport.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                app:colorChart="#5fbb33"
+                app:percentage="70"
+                app:text="QWERTY" />
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

@@ -86,7 +86,7 @@ public class BarChartStatusReport extends View {
             // draw line collum
             mPaint.setColor(Color.parseColor("#cdcdcd"));
             mPaint.setStrokeWidth(2);
-            for (int i = 2; i < mData.size(); i++) {
+            for (int i = 2; i < 6; i++) {
                 tempCanvas.drawLine(mWidthCol * i, 0, mWidthCol * i, mHeightCol * mData.size(), mPaint);
             }
 
