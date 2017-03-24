@@ -111,7 +111,8 @@ public class BarChartStatusProfile extends View {
                 if (mData.get(i).getPoint() != mMax2) {
                     mPaint.setColor(Color.parseColor("#A4A4A4"));
                 }
-                tempCanvas.drawText(mData.get(i).getName(), 40, mHeightCol * i + mPadding + 20, mPaint);
+                mPaint.getTextBounds(mData.get(i).getName() , 0, mData.get(i).getName().length(), bounds);
+                tempCanvas.drawText(mData.get(i).getName(), mWidthCol - bounds.width() - 40, mHeightCol * i + mPadding + 20, mPaint);
             }
 
             //draw point bar chart
@@ -142,8 +143,8 @@ public class BarChartStatusProfile extends View {
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
                 if (mData.get(i).getPoint() == mMax2)
-                    mPaint.setAlpha(210);
-                else mPaint.setAlpha(150);
+                    mPaint.setAlpha(200);
+                else mPaint.setAlpha(140);
                 tempCanvas.drawLine(mWidthCol * 1, mHeightCol * i + mPadding, (float) (mWidthCol * 1 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
             }
 
