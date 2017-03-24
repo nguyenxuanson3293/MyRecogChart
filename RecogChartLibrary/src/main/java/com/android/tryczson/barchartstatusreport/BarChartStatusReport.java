@@ -42,7 +42,7 @@ public class BarChartStatusReport extends View {
         mHeight = h;
         mWidthCol = (float) (w / 5.7);
         mHeightCol = (float) (h / (mData.size() + 1));
-        mPadding = 75;
+        mPadding = 50;
     }
 
     public ArrayList<BarChartStatusData> getListStatus() {

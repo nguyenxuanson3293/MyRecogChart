@@ -88,7 +88,7 @@ public class BarChartStatusProfile extends View {
             Rect bounds = new Rect();
 
             // draw line collum
-            mPaint.setColor(Color.parseColor("#d6d6d6"));
+            mPaint.setColor(Color.parseColor("#A4A4A4"));
             for (int i = 1; i < 6; i++) {
                 mPaint.setStrokeWidth(2);
                 if (i == 1)
@@ -97,7 +97,7 @@ public class BarChartStatusProfile extends View {
             }
 
             // draw point collum
-            mPaint.setColor(Color.parseColor("#a0a0a0"));
+            mPaint.setColor(Color.parseColor("#A4A4A4"));
             mPaint.setTextSize(mWidth / 26f);
             for (int i = 0; i < 5; i++) {
                 mPaint.getTextBounds(String.valueOf((int) (mPointPerCol * i)), 0, String.valueOf((int) (mPointPerCol * i)).length(), bounds);
@@ -109,7 +109,7 @@ public class BarChartStatusProfile extends View {
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor("#000000"));
                 if (mData.get(i).getPoint() != mMax2) {
-                    mPaint.setColor(Color.parseColor("#828282"));
+                    mPaint.setColor(Color.parseColor("#A4A4A4"));
                 }
                 tempCanvas.drawText(mData.get(i).getName(), 40, mHeightCol * i + mPadding + 20, mPaint);
             }
@@ -119,14 +119,14 @@ public class BarChartStatusProfile extends View {
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor("#000000"));
                 if (mData.get(i).getPoint() != mMax2) {
-                    mPaint.setColor(Color.parseColor("#828282"));
+                    mPaint.setColor(Color.parseColor("#A4A4A4"));
                 }
                 tempCanvas.drawText(String.valueOf(mData.get(i).getPoint() + "通"), (float) (mWidthCol * 1 + mPerPoint * mData.get(i).getPoint() + 12), mHeightCol * i + mPadding + 15, mPaint);
             }
 
             // draw max point
             Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.ic_point_barchart);
-            bitmap1 = Bitmap.createScaledBitmap(bitmap1,  mWidth/8, mWidth/8 , true);
+            bitmap1 = Bitmap.createScaledBitmap(bitmap1,  mWidth/8, mWidth/7 , true);
             tempCanvas.drawBitmap(bitmap1,(float) (mWidthCol * 1.9) ,(float) (mHeightCol * (mData.size() + 0.5)), null);
 
             mPaint.setTextSize(mWidth / 10f);
@@ -134,7 +134,6 @@ public class BarChartStatusProfile extends View {
             mPaint.getTextBounds(String.valueOf(sum), 0, String.valueOf(sum).length(), bounds);
             tempCanvas.drawText(String.valueOf(sum),(float) (mWidthCol * 1.9 + bitmap1.getWidth()),(float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10 , mPaint);
             mPaint.setTextSize(mWidth / 26f);
-            mPaint.setAlpha(150);
             tempCanvas.drawText("通", (float) (mWidthCol * 1.9 + bitmap1.getWidth() + bounds.width() + 20), (float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10, mPaint);
 
             // draw bar chart
@@ -158,7 +157,6 @@ public class BarChartStatusProfile extends View {
                     x = x + (float) (mPerPoint * mData.get(i).getAll_stamps().get(j).getPoint());
                 }
             }
-
             canvas.save();
             canvas.drawBitmap(bitmap, 0, 0, null);
             canvas.restore();
