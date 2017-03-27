@@ -93,9 +93,11 @@ public class BarChartStatusReport extends View {
 
             // draw line collum
             mPaint.setColor(Color.parseColor("#cdcdcd"));
-            mPaint.setStrokeWidth(2);
             for (int i = 2; i < 6; i++) {
-                tempCanvas.drawLine(mWidthCol * i, 0, mWidthCol * i, mHeightCol * mData.size(), mPaint);
+                mPaint.setStrokeWidth(2);
+                if (i == 2)
+                    mPaint.setStrokeWidth(4);
+                tempCanvas.drawLine(mWidthCol * i -2 , 0, mWidthCol * i -2 , mHeightCol * mData.size(), mPaint);
             }
 
             // draw point collum

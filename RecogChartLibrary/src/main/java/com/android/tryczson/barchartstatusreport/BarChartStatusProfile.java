@@ -97,9 +97,9 @@ public class BarChartStatusProfile extends View {
             // draw line collum
             mPaint.setColor(Color.parseColor("#A4A4A4"));
             for (int i = 1; i < 6; i++) {
-                mPaint.setStrokeWidth(2);
+                mPaint.setStrokeWidth(1);
                 if (i == 1)
-                    mPaint.setStrokeWidth(4);
+                    mPaint.setStrokeWidth(2);
                 tempCanvas.drawLine(mWidthCol * i - 2 , 0, mWidthCol*i - 2, mHeightCol * mData.size(), mPaint);
             }
 
@@ -120,7 +120,7 @@ public class BarChartStatusProfile extends View {
                     mPaint.setColor(Color.parseColor("#A4A4A4"));
                 }
                 mPaint.getTextBounds(mData.get(i).getName() , 0, mData.get(i).getName().length(), bounds);
-                tempCanvas.drawText(mData.get(i).getName(), mWidthCol - bounds.width() - 40, mHeightCol * i + mPadding + 20, mPaint);
+                tempCanvas.drawText(mData.get(i).getName(), mWidthCol - bounds.width() - 30, mHeightCol * i + mPadding + 20, mPaint);
             }
 
             //draw point bar chart
@@ -148,7 +148,7 @@ public class BarChartStatusProfile extends View {
             tempCanvas.drawText("通", (float) (mWidthCol * 1.9 + bitmap1.getWidth() + bounds.width() + 10), (float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10 - 5, mPaint);
 
             // draw bar chart
-            int strokeBar = 55;
+            int strokeBar = 60;
             mPaint.setStrokeWidth(strokeBar);
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
@@ -165,12 +165,12 @@ public class BarChartStatusProfile extends View {
             }
 
             // draw bar chart child
-            mPaint.setStrokeWidth(10);
+            mPaint.setStrokeWidth(8);
             for (int i = 0; i < mData.size(); i++) {
                 float x = mWidthCol ;
                 for (int j = 0; j< mData.get(i).getAll_stamps().size(); j++) {
                     mPaint.setColor(Color.parseColor(mData.get(i).getAll_stamps().get(j).getColor()));
-                    tempCanvas.drawLine(x , mHeightCol * i + mPadding + strokeBar/2 + 5, (float) (x + mPerPoint * mData.get(i).getAll_stamps().get(j).getPoint()), mHeightCol * i + mPadding + strokeBar/2 +5 , mPaint);
+                    tempCanvas.drawLine(x , mHeightCol * i + mPadding + strokeBar/2 + 2, (float) (x + mPerPoint * mData.get(i).getAll_stamps().get(j).getPoint()), mHeightCol * i + mPadding + strokeBar/2 +2 , mPaint);
                     x = x + (float) (mPerPoint * mData.get(i).getAll_stamps().get(j).getPoint());
                 }
             }
