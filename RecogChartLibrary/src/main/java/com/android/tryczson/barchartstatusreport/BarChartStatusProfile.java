@@ -100,7 +100,7 @@ public class BarChartStatusProfile extends View {
                 mPaint.setStrokeWidth(1);
                 if (i == 1)
                     mPaint.setStrokeWidth(2);
-                tempCanvas.drawLine(mWidthCol * i - 2 , 0, mWidthCol*i - 2, mHeightCol * mData.size(), mPaint);
+                tempCanvas.drawLine(mWidthCol * i , 0, mWidthCol*i , mHeightCol * mData.size(), mPaint);
             }
 
             // draw point collum
@@ -148,7 +148,7 @@ public class BarChartStatusProfile extends View {
             tempCanvas.drawText("通", (float) (mWidthCol * 1.9 + bitmap1.getWidth() + bounds.width() + 10), (float) (mHeightCol * (mData.size() + 0.5)) + mWidth/10 - 5, mPaint);
 
             // draw bar chart
-            int strokeBar = 60;
+            int strokeBar = (int) (mHeightCol/3);
             mPaint.setStrokeWidth(strokeBar);
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
@@ -165,7 +165,7 @@ public class BarChartStatusProfile extends View {
             }
 
             // draw bar chart child
-            mPaint.setStrokeWidth(8);
+            mPaint.setStrokeWidth(mHeightCol/25);
             for (int i = 0; i < mData.size(); i++) {
                 float x = mWidthCol ;
                 for (int j = 0; j< mData.get(i).getAll_stamps().size(); j++) {
