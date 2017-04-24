@@ -94,10 +94,10 @@ public class BarChartStatusReport extends View {
             // draw line collum
             mPaint.setColor(Color.parseColor("#cdcdcd"));
             for (int i = 2; i < 6; i++) {
-                mPaint.setStrokeWidth(2);
+                mPaint.setStrokeWidth(1);
                 if (i == 2)
-                    mPaint.setStrokeWidth(4);
-                tempCanvas.drawLine(mWidthCol * i -2 , 0, mWidthCol * i -2 , mHeightCol * mData.size(), mPaint);
+                    mPaint.setStrokeWidth(2);
+                tempCanvas.drawLine(mWidthCol * i - 2, 0, mWidthCol * i - 2, mHeightCol * mData.size(), mPaint);
             }
 
             // draw point collum
@@ -112,7 +112,7 @@ public class BarChartStatusReport extends View {
             // draw name status
             for (int i = 0; i < mData.size(); i++) {
                 if (mData.get(i).getPoint() == mMax2)
-                    mPaint.setTextSize(mWidth / 22f);
+                    mPaint.setTextSize(mWidth / 20f);
                 else mPaint.setTextSize(mWidth / 25f);
                 mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
                 tempCanvas.drawText(mData.get(i).getName(), 20, mHeightCol * i + mPadding + 15, mPaint);
@@ -123,18 +123,22 @@ public class BarChartStatusReport extends View {
                 mPaint.setTextSize(mWidth / 20f);
                 mPaint.setColor(Color.parseColor("#000000"));
                 if (mData.get(i).getPoint() != mMax2) {
-                    mPaint.setTextSize(mWidth / 25f);
+                    mPaint.setTextSize(mWidth / 24f);
                     mPaint.setColor(Color.parseColor("#a0a0a0"));
                 }
-                tempCanvas.drawText(String.valueOf(mData.get(i).getPoint() + "pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 15, mPaint);
+                mPaint.getTextBounds(String.valueOf(mData.get(i).getPoint()), 0, String.valueOf(mData.get(i).getPoint()).length(), bounds);
+                tempCanvas.drawText(String.valueOf(mData.get(i).getPoint()), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 15, mPaint);
+                mPaint.setTextSize(mWidth / 28f);
+                mPaint.setColor(Color.parseColor("#a0a0a0"));
+                tempCanvas.drawText(String.valueOf("pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 18 + bounds.width()), mHeightCol * i + mPadding + 15, mPaint);
             }
 
             // draw bar chart
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
                 if (mData.get(i).getPoint() == mMax2)
-                    mPaint.setStrokeWidth(48);
-                else mPaint.setStrokeWidth(35);
+                    mPaint.setStrokeWidth(52);
+                else mPaint.setStrokeWidth(36);
                 tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
             }
 
