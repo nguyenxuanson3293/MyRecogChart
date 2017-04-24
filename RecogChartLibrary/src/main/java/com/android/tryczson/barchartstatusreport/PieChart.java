@@ -27,6 +27,8 @@ public class PieChart extends View {
 
     public PieChart(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.pieChartElement);
         try {
             percentage = Integer.parseInt(a.getString(R.styleable.pieChartElement_percentage));
@@ -80,11 +82,6 @@ public class PieChart extends View {
         if (percentage != 0) {
             Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             Canvas tempCanvas = new Canvas(bitmap);
-
-            mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            mPaint.setAntiAlias(true);
-            mPaint.setDither(true);
-            mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
             tempCanvas.drawColor(Color.TRANSPARENT);
             mPaint.setColor(Color.parseColor(mColorPieChart));

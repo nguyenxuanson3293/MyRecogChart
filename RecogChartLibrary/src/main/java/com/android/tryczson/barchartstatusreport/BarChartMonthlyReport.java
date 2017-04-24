@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -120,11 +121,13 @@ public class BarChartMonthlyReport extends RelativeLayout {
             tempCanvas.drawText(date.getYear() + "年" + date.getMonth() + "月", mWidth / 2 - bounds.width() / 2, mDateHeight - 20, mPaint);
 
             mPaint.setTextSize(mWidth / 10f);
-            mPaint.setStrokeWidth(5);
+            mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+         //   mPaint.setStrokeWidth(5);
             mPaint.getTextBounds(mPoint, 0, mPoint.length(), bounds);
             mPointHeight = bounds.height();
             tempCanvas.drawText(mPoint, mWidth / 2 - bounds.width() / 2, mDateHeight + mPointHeight + 10, mPaint);
 
+            mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
             mPaint.setTextSize(mWidth / 25f);
             mPaint.setColor(Color.parseColor("#000000"));
             tempCanvas.drawText("pt", mWidth / 2 + bounds.width() / 2 + 10, mDateHeight + mPointHeight + 10, mPaint);
@@ -199,7 +202,7 @@ public class BarChartMonthlyReport extends RelativeLayout {
                 for (int i = 1 ; i < 4; i++) {
                     tempCanvas.drawLine(mLeftChart , mRowHeight * i, mWidth, mRowHeight * i, mPaint);
                 }
-                tempCanvas.drawLine( mLeftChart , mRowHeight * 3 + 40, mWidth, mRowHeight * 3 + 40, mPaint);
+                tempCanvas.drawLine( mLeftChart , mRowHeight * 3 + 30, mWidth, mRowHeight * 3 + 30, mPaint);
 
                 canvas.save();
                 canvas.drawBitmap(bitmap, 0, 0, null);

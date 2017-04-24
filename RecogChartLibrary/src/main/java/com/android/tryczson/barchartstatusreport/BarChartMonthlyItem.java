@@ -67,7 +67,7 @@ public class BarChartMonthlyItem extends View {
         mPaint.setColor(Color.parseColor("#d7d7d7"));
         mPaint.setStrokeWidth(2);
         if (isShowCursor)
-            tempCanvas.drawLine(mWidth/2 - 16 , mRowHeight*2 + 40, mWidth / 2 - 16 , 0, mPaint);
+            tempCanvas.drawLine(mWidth/2 - 16 , mRowHeight*2 + 30, mWidth / 2 - 16 , 0, mPaint);
 
         canvas.save();
         canvas.drawBitmap(bitmap, 0, 0, null);
