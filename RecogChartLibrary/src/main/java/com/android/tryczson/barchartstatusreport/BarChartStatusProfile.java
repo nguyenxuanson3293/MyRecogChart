@@ -43,7 +43,7 @@ public class BarChartStatusProfile extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth = w;
         mHeight = h;
-        mWidthCol = (float) (w / 5.8);
+        mWidthCol = (float) (w / 6);
         mHeightCol = (float) (h / (mData.size() + 2));
         mPadding = (int) (mHeightCol/2);
     }
@@ -123,7 +123,7 @@ public class BarChartStatusProfile extends View {
 
             //draw point bar chart
             mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            mPaint.setTextSize(mWidth / 24f);
+            mPaint.setTextSize(mWidth / 26f);
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor("#000000"));
                 if (mData.get(i).getPoint() != mMax2) {
