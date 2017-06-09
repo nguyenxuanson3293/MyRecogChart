@@ -36,11 +36,12 @@ public class BarChartMonthlyReport extends RelativeLayout {
     private ArrayList<BarChartMonthlyData> mListData = new ArrayList<>();
     private RecyclerView mSnappingRecyclerView;
     private String mDate = "", mPoint = "", mColor = "";
-    private boolean isFirst = true;
+    private boolean isFirst = true, isFirst2 = true, isFirst3 = true;
     private float mMax;
     private float mPerPoint;
     private int selectedPosition = 0;
     private SplitDate date;
+    private int positionLast;
 
     public BarChartMonthlyReport(Context context) {
         super(context);
@@ -162,8 +163,9 @@ public class BarChartMonthlyReport extends RelativeLayout {
             super.onDraw(canvas);
             if (mListData.size() > 0) {
                 if (isFirst) {
-                    mDate = mListData.get(0).getDate();
-                    mPoint = String.valueOf(mListData.get(0).getPt());
+                    selectedPosition = mListData.size() -1 ;
+                    mDate = mListData.get(mListData.size() -1 ).getDate();
+                    mPoint = String.valueOf(mListData.get(mListData.size() -1 ).getPt());
                 }
 
                 for (int i = 0; i < mListData.size(); i++)
@@ -222,6 +224,7 @@ public class BarChartMonthlyReport extends RelativeLayout {
                     addView(mSnappingRecyclerView);
                     mSnappingRecyclerView.setAdapter(new barChartAdapter());
                     isFirst = false;
+                    mSnappingRecyclerView.scrollToPosition(selectedPosition);
                 }
             } else {
                 Bitmap bitmap = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
@@ -254,17 +257,18 @@ public class BarChartMonthlyReport extends RelativeLayout {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             if (holder instanceof VHItem) {
                 final VHItem item = (VHItem) holder;
+                    if (position == selectedPosition) {
+                        item.lineChartItemView.setShowCursor(true);
+                    } else {
+                        item.lineChartItemView.setShowCursor(false);
+                    }
+
                 item.lineChartItemView.setmPoint(mListData.get(position).getPt());
                 item.lineChartItemView.setmDate(mListData.get(position).getDate());
                 item.lineChartItemView.setmPxPerPoint(mPerPoint);
                 item.lineChartItemView.setmRowHeight(mRowHeight);
                 item.lineChartItemView.setmColor(mColor);
 
-                if (position == selectedPosition) {
-                    item.lineChartItemView.setShowCursor(true);
-                } else {
-                    item.lineChartItemView.setShowCursor(false);
-                }
                 item.itemView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {

@@ -45,7 +45,7 @@ public class BarChartStatusReport extends View {
         mHeight = h;
         mWidthCol = (float) (w / 5.7);
         mHeightCol = (float) (h / (mData.size() + 1));
-        mPadding = 45;
+        mPadding = 40;
     }
 
     public ArrayList<BarChartStatusData> getListStatus() {
@@ -110,7 +110,7 @@ public class BarChartStatusReport extends View {
             for (int i = 0; i < mData.size(); i++) {
                 if (mData.get(i).getPoint() == mMax2) {
                     mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-                    mPaint.setTextSize(mWidth / 21f);
+                    mPaint.setTextSize(mWidth / 20f);
                 }
                 else {
                     mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
@@ -129,21 +129,41 @@ public class BarChartStatusReport extends View {
                     mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
                     mPaint.setTextSize(mWidth / 22f);
                     mPaint.setColor(Color.parseColor("#a0a0a0"));
+                    mPaint.getTextBounds(String.valueOf(mData.get(i).getPoint()), 0, String.valueOf(mData.get(i).getPoint()).length(), bounds);
+                    tempCanvas.drawText(String.valueOf(mData.get(i).getPoint()), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 12, mPaint);
+                    mPaint.setTextSize(mWidth / 25f);
+                    mPaint.setColor(Color.parseColor("#a0a0a0"));
+                    tempCanvas.drawText(String.valueOf("pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 18 + bounds.width()), mHeightCol * i + mPadding + 12, mPaint);
+                } else {
+                    if (i == mData.size() - 1) {
+                        mPaint.getTextBounds(String.valueOf(mData.get(i).getPoint()), 0, String.valueOf(mData.get(i).getPoint()).length(), bounds);
+                        tempCanvas.drawText(String.valueOf(mData.get(i).getPoint()), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 4, mPaint);
+                        mPaint.setTextSize(mWidth / 25f);
+                        mPaint.setColor(Color.parseColor("#000000"));
+                        tempCanvas.drawText(String.valueOf("pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 18 + bounds.width()), mHeightCol * i + mPadding + 4, mPaint);
+                    } else {
+                        mPaint.getTextBounds(String.valueOf(mData.get(i).getPoint()), 0, String.valueOf(mData.get(i).getPoint()).length(), bounds);
+                        tempCanvas.drawText(String.valueOf(mData.get(i).getPoint()), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 12, mPaint);
+                        mPaint.setTextSize(mWidth / 25f);
+                        mPaint.setColor(Color.parseColor("#000000"));
+                        tempCanvas.drawText(String.valueOf("pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 18 + bounds.width()), mHeightCol * i + mPadding + 12, mPaint);
+                    }
                 }
-                mPaint.getTextBounds(String.valueOf(mData.get(i).getPoint()), 0, String.valueOf(mData.get(i).getPoint()).length(), bounds);
-                tempCanvas.drawText(String.valueOf(mData.get(i).getPoint()), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 10), mHeightCol * i + mPadding + 10, mPaint);
-                mPaint.setTextSize(mWidth / 25f);
-                mPaint.setColor(Color.parseColor("#a0a0a0"));
-                tempCanvas.drawText(String.valueOf("pt"), (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint() + 18 + bounds.width()), mHeightCol * i + mPadding + 10, mPaint);
             }
 
             // draw bar chart
             for (int i = 0; i < mData.size(); i++) {
                 mPaint.setColor(Color.parseColor(mData.get(i).getColor()));
-                if (mData.get(i).getPoint() == mMax2)
-                    mPaint.setStrokeWidth(48);
-                else mPaint.setStrokeWidth(32);
-                tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
+                if (mData.get(i).getPoint() == mMax2) {
+                    mPaint.setStrokeWidth(45);
+                    if ( i == mData.size() -1 )
+                        tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding - 10, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding - 10, mPaint);
+                    else tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
+                }
+                else {
+                    mPaint.setStrokeWidth(32);
+                    tempCanvas.drawLine(mWidthCol * 2, mHeightCol * i + mPadding, (float) (mWidthCol * 2 + mPerPoint * mData.get(i).getPoint()), mHeightCol * i + mPadding, mPaint);
+                }
             }
 
             canvas.save();
